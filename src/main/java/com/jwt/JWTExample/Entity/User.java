@@ -3,6 +3,9 @@ package com.jwt.JWTExample.Entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,8 +24,12 @@ public class User implements UserDetails {
     @Id
     private  String userId;
     private String name;
+    @Email(message = "Please enter a valid email id")
+    @NotBlank(message = "Email Id cannot be blank")
+    @NotNull(message = "Email cannot be blank")
 
     private String email;
+    @NotNull(message = "Password cannot be blank")
     private String password;
 
     @Override

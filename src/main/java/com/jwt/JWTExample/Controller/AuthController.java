@@ -6,6 +6,7 @@ import com.jwt.JWTExample.Model.JwtResponse;
 import com.jwt.JWTExample.Security.JwtHelper;
 import com.jwt.JWTExample.Service.UserService;
 import com.jwt.JWTExample.repositories.UserRepository;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,7 @@ public class AuthController {
 
 
     @PostMapping("/login")
-    public ResponseEntity<JwtResponse> login(@RequestBody JwtRequest request) {
+    public ResponseEntity<JwtResponse> login(@RequestBody @Valid JwtRequest request) {
 
         this.doAuthenticate(request.getEmail(), request.getPassword());
 
@@ -71,7 +72,7 @@ public class AuthController {
     }
 
 @PostMapping("/create-user")
-    public User createUser(@RequestBody User user){
+    public User createUser(@RequestBody @Valid User user){
 return userService.createUser(user);
     }
 }
